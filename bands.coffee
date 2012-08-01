@@ -93,10 +93,10 @@ appServer.addRoute "^/artist$", (req, res)->
 appServer.addRoute "^/search$", (req, res)->
   query = req.param('term')
 
-  redisClient.keys "band-name:"+query+"*", (error, keys)->
+  redisClient.keys "band:"+query+"*", (error, keys)->
     bands = []
     keys.forEach (key)->
-      bands.push key.replace("band-name:", '')
+      bands.push key.replace("band:", '')
     res.write JSON.stringify(bands)
     res.end()
 
